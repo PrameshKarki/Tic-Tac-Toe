@@ -1,0 +1,143 @@
+/* #stopUsingPx */
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+:root{
+    --cell-size:10rem;
+    --mark-size:calc(var(--cell-size) * .9) 
+
+}
+html{
+    font-size: 62.5%;
+    /* This will set 1rem=10px */
+
+}
+body{
+    overflow: hidden;
+}
+.board{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center ;
+    grid-template-columns: repeat(3,auto);
+     
+}
+.cell{
+ width:var(--cell-size);
+ height:var(--cell-size);
+ border: 0.1rem solid black;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ position: relative;
+ cursor: pointer;
+}
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3){
+    border-top:none;  
+}
+
+.cell:nth-child(3n+1){
+    border-left: none ;
+}
+.cell:nth-child(3n+3){
+    border-right:none; 
+}
+.cell:last-child,
+.cell:nth-child(7),
+.cell:nth-child(8){
+    border-bottom: none  ;
+}
+.cell.circle,
+.cell.x{
+    cursor: not-allowed;
+}
+.cell.x::before,
+.cell.x::after,
+.cell.circle::before{
+    background-color: black;
+}
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before{
+    background-color: lightgrey;
+}
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after{
+    content:'';
+    position: absolute;
+    width:calc(var(--mark-size) * 0.15);
+    height:var(--mark-size);
+ }
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before{
+    transform: rotate(45deg);
+}
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after{
+    transform: rotate(-45deg);
+}
+
+
+.cell.circle::before,
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after{
+    content:'';
+    position: absolute;
+    border-radius: 50%;
+}
+.cell.circle::before,
+.board.circle .cell:not(.x):not(.circle):hover::before{
+    width:var(--mark-size);
+    height:var(--mark-size);
+}
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after{
+    width:calc(var(--mark-size) * .7);
+    height:calc(var(--mark-size) * .7);
+    background-color:white; 
+}
+.message-container{
+    display: none;
+    position: fixed;
+    left:0;
+    top:0;
+    right:0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.7);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color:white;
+    font-size: 5rem;
+}
+#restart-button{
+    font-size: 2.5rem;
+    border: none;
+    outline:none;
+    background-color: black;
+    color:white;
+    padding:0.5rem 0.8rem;
+    margin-top: 2rem;
+    transition: 0.5s;
+    cursor: pointer;
+}
+#restart-button:hover{
+   transform: scale(1.1);
+}
+.message-container.show{
+    display: flex;
+}
+/* <!-- Actual credit of this game goes to Web Dev Simplified. --> */
+/* Pramesh Karki */
